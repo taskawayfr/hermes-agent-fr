@@ -4,14 +4,9 @@ Ce chapitre explique où ranger quoi pour qu'un agent ait une voix, un rôle et 
 
 La règle qui guide tout le chapitre : chaque type d'information a sa place. Mal rangée, elle est soit oubliée, soit relue à chaque message pour rien.
 
-| Ce que vous voulez dire | Où le mettre |
-|---|---|
-| Qui est l'agent, comment il parle | `SOUL.md` |
-| Règles d'un projet ou d'un dossier de travail | `AGENTS.md` (ou `.hermes.md`) |
-| Une procédure à suivre, étape par étape | une compétence (skill) |
-| Un petit fait utile à chaque conversation | la mémoire |
-| Un fait qui doit rester exact (tarif, adresse, règle) | un fichier que l'agent relit, jamais la mémoire |
-| Un deuxième agent, avec ses propres secrets et sa propre mémoire | un profil |
+![Où ranger quoi : qui est l'agent et comment il parle va dans SOUL.md ; les règles d'un projet dans AGENTS.md ; une procédure dans une compétence ; une préférence dans la mémoire ; un fait qui doit rester exact (tarif, adresse, règle) dans un fichier de référence que l'agent relit, jamais la mémoire ; un deuxième agent dans un profil.](../images/ranger.png)
+
+La doc officielle a une page qui détaille chaque fichier : [« Which file does what »](https://hermes-agent.nousresearch.com/docs/user-guide/which-file-does-what).
 
 ## Que mettre dans SOUL.md ?
 
@@ -29,11 +24,13 @@ Hermes en crée un par défaut s'il n'existe pas, et ne l'écrase jamais. Ouvrez
 - le ton et le style,
 - la façon de traiter l'incertitude et le désaccord.
 
+Un exemple complet en français, prêt à adapter : [`exemples/SOUL.md`](../exemples/SOUL.md).
+
 À ne pas mettre (la doc est claire là-dessus) : chemins de fichiers, commandes, ports, architecture, procédures de travail. Tout cela relève de `AGENTS.md` ou d'une compétence. Un SOUL rempli de détails de projet devient contradictoire, et la doc signale qu'un fichier trop long est tronqué.
 
 Après une modification, relancez Hermes ou ouvrez une nouvelle session. Pour un changement temporaire de ton, la commande `/personality` superpose un style le temps d'une session sans toucher au SOUL.
 
-> **Sur le terrain.** Dans notre installation, une équipe de cinq profils : un orchestrateur et quatre spécialistes, chacun avec son SOUL et ses compétences. Les SOUL font moins de 100 lignes ; les règles communes à tous les agents sont dans un fichier à part.
+> **Sur le terrain (octobre 2026).** Notre équipe compte cinq profils : un orchestrateur et quatre spécialistes, chacun avec son SOUL et ses compétences. Les SOUL font moins de 100 lignes ; les règles communes à tous les agents sont dans un fichier à part.
 
 ## Et les fichiers de contexte (AGENTS.md) ?
 
@@ -87,6 +84,8 @@ Quand l'utiliser.
 Comment vérifier que c'est réussi.
 ```
 
+Un exemple complet en français, testé à chaque modification de ce guide : [`exemples/skills/relance-devis/`](../exemples/skills/relance-devis/SKILL.md). Gardez les intertitres anglais (`When to Use`, `Procedure`…) : c'est le format de la doc.
+
 La compétence est disponible tout de suite, sans enregistrement : tapez `/ma-competence` dans une conversation. Des fichiers d'appui (`references/`, `templates/`, `scripts/`) peuvent l'accompagner.
 
 Pour en installer une existante :
@@ -129,15 +128,15 @@ hermes -p redacteur gateway start
 hermes profile describe redacteur --text "Rédige les textes."
 ```
 
-Autres commandes utiles : `hermes profile use <nom>` (profil par défaut), `rename`, `export`, `import`, `delete`. `--clone` copie la configuration, le SOUL, les compétences et la mémoire d'un profil existant ; `--no-skills` crée un profil sans compétences fournies.
+Autres commandes utiles : `hermes profile use <nom>` (profil par défaut), `rename`, `export`, `import`, `delete`. `--clone` copie la configuration, le `.env` (donc les clés des fournisseurs), le SOUL, les compétences et la mémoire d'un profil existant ; `--no-skills` crée un profil sans compétences fournies.
 
 Un profil ne démarre pas dans un dossier de projet. Réglez `terminal.cwd` dans son `config.yaml` si besoin.
 
-> **Sur le terrain.** Dans notre installation, les profils sont générés depuis un dépôt git par un script, jamais modifiés à la main ; un contrôle quotidien compare les profils réels au dépôt et alerte sur Telegram en cas d'écart.
+> **Sur le terrain (octobre 2026).** Nos profils sont générés depuis un dépôt git par un script, jamais modifiés à la main ; un contrôle quotidien compare les profils réels au dépôt et alerte sur Telegram en cas d'écart.
 
 Piège important : un clonage normal ne copie plus les jetons de messagerie (la doc le précise), et l'option `--clone-channels` les copie quand même. Dans ce cas, le jeton est partagé et les deux profils se disputent le même bot.
 
-> **Sur le terrain.** Dans notre installation, nous ne clonons jamais un profil qui porte un jeton Telegram : le jeton est copié et les deux profils se disputent le même bot.
+> **Sur le terrain (octobre 2026).** Nous ne clonons jamais un profil qui porte un jeton Telegram : le jeton est copié et les deux profils se disputent le même bot.
 
 Pour chaque nouveau profil, configurez son propre bot avec `hermes -p <nom> setup`.
 
@@ -149,7 +148,7 @@ Pour faire collaborer de vrais profils, la doc décrit aussi un tableau de tâch
 
 Si vous voulez désactiver la délégation intégrée, ajoutez `delegation` à la liste `agent.disabled_toolsets` du profil (voir le chapitre 5).
 
-> **Sur le terrain.** Dans notre installation, la délégation intégrée (`delegate_task`) est désactivée sur l'orchestrateur : il confie le travail aux autres profils par un petit script, ce qui laisse une trace de chaque passage de main.
+> **Sur le terrain (octobre 2026).** Chez nous, la délégation intégrée (`delegate_task`) est désactivée sur l'orchestrateur : il confie le travail aux autres profils par un petit script, ce qui laisse une trace de chaque passage de main.
 
 ## Sources
 

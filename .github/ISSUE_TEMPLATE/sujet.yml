@@ -1,0 +1,16 @@
+name: Sujet manquant
+description: Une question que le guide devrait couvrir
+labels: ["sujet"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Votre question
+      description: Formulée comme vous l'avez cherchée.
+    validations:
+      required: true
+  - type: textarea
+    id: contexte
+    attributes:
+      label: Votre situation
+      description: Système, messagerie, fournisseur de modèle… ce qui aide à répondre.

@@ -8,6 +8,8 @@ La passerelle (gateway) est un processus qui tourne en arrière-plan sur la mach
 
 Telegram n'est pas la seule option. La documentation décrit aussi Discord, Slack, WhatsApp, Signal, SMS, e-mail, Mattermost, Matrix et d'autres. Le principe est le même pour toutes : un jeton ou des identifiants, une liste de personnes autorisées, puis la passerelle. Ce chapitre suit le cas Telegram.
 
+![Les six étapes pour brancher Telegram : trois dans Telegram (créer le bot avec BotFather, garder le jeton, trouver son identifiant avec userinfobot), trois sur la machine (hermes gateway setup, hermes gateway run pour essayer, hermes gateway install puis start pour laisser tourner).](../images/telegram.png)
+
 ## Comment créer le bot Telegram ?
 
 Tout bot Telegram est créé auprès de @BotFather, le bot officiel de Telegram qui gère les bots.
@@ -108,7 +110,7 @@ Sur macOS, le service mémorise votre variable PATH au moment de l'installation.
 
 Journaux : sur macOS, `tail -f ~/.hermes/logs/gateway.log` ; sur Linux, `journalctl --user -u hermes-gateway -f`.
 
-> **Sur le terrain.** Dans notre installation, après une mise à jour d'Hermes, un `hermes gateway restart` a parfois été nécessaire pour que la configuration soit prise en compte.
+> **Sur le terrain (octobre 2026).** Chez nous, après une mise à jour d'Hermes, un `hermes gateway restart` a parfois été nécessaire pour que la configuration soit prise en compte.
 
 ## Comment vérifier que tout va bien ?
 

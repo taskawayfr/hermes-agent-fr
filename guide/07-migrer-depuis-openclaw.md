@@ -2,7 +2,7 @@
 
 Ce chapitre s'adresse à celles et ceux qui utilisent déjà OpenClaw (ou ses anciens noms, Clawdbot et Moltbot) et veulent reprendre leur configuration, leur mémoire et leurs compétences dans Hermes.
 
-> **Sur le terrain.** Dans notre installation, nous n'utilisons pas OpenClaw nous-mêmes : ce chapitre s'appuie sur la documentation officielle, et nous n'avons pas fait cette migration. Les commandes ont été relues dans la documentation et dans l'aide en ligne (`--help`), pas exécutées. Lancez toujours la simulation d'abord.
+> **Sur le terrain (octobre 2026).** Nous n'utilisons pas OpenClaw nous-mêmes : ce chapitre s'appuie sur la documentation officielle, et nous n'avons pas fait cette migration. Les commandes ont été relues dans la documentation et dans l'aide en ligne (`--help`), pas exécutées. Lancez toujours la simulation d'abord.
 
 ## Que fait la commande de migration ?
 
@@ -31,7 +31,7 @@ D'après la documentation :
 - **Modèle et fournisseurs** : le modèle par défaut et les fournisseurs personnalisés.
 - **Comportement de l'agent** : nombre de tours, niveau de raisonnement, compression du contexte, fuseau horaire, délai d'exécution des commandes.
 - **Serveurs MCP** et réglages de voix (synthèse vocale).
-- **Messageries** : jeton Telegram et liste des personnes autorisées, ainsi que Discord, Slack, Signal, Matrix, Mattermost, WhatsApp (identifiants autorisés).
+- **Messageries** : listes des personnes autorisées (Telegram, Discord, Slack, Signal, Matrix, Mattermost, WhatsApp). Les jetons des bots sont des secrets : ils ne sont repris qu'avec `--migrate-secrets` (section suivante).
 - **Autres réglages** : mode d'approbation des commandes, liste de commandes autorisées, réglages du navigateur.
 
 ## Qu'est-ce qui n'est pas importé par défaut ?

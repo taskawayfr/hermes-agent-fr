@@ -86,14 +86,14 @@ Avant d'aller plus loin, relisez ce qui s'est passé : `hermes logs update` mont
 
 Une mise à jour peut migrer des données d'une façon que l'ancienne version ne sait plus lire. Revenir en arrière n'est donc pas qu'un retour de code : il faut une sauvegarde d'avant la mise à jour.
 
-> **Sur le terrain.** Dans notre installation, après une mise à jour, un paquet a disparu de l'environnement des outils et un outil s'est arrêté sans bruit. Et un plugin n'est chargé qu'au démarrage du processus : après une modification, il faut redémarrer la passerelle. Un garde-fou se teste dans la vraie surface (Telegram), pas seulement au terminal.
+> **Sur le terrain (octobre 2026).** Chez nous, après une mise à jour, un paquet a disparu de l'environnement des outils et un outil s'est arrêté sans bruit. Et un plugin n'est chargé qu'au démarrage du processus : après une modification, il faut redémarrer la passerelle. Un garde-fou se teste dans la vraie surface (Telegram), pas seulement au terminal.
 
 ## Une tâche programmée ne se lance pas ou n'envoie rien
 
 1. La tâche existe-t-elle et est-elle active ? `hermes cron list` (l'état doit être `[active]`).
 2. **La passerelle tourne-t-elle ?** C'est la cause la plus fréquente : c'est elle qui déclenche les tâches. Une session de discussion dans un terminal ne le fait pas.
 3. L'horloge de la machine et son fuseau horaire sont-ils corrects ? Comparez `date` et les heures de prochain passage dans `hermes cron list`.
-4. La destination est-elle bien configurée (jeton du bot dans `.env`, orthographe exacte) ? Une destination mal réglée supprime l'envoi sans bruit, alors que la tâche s'exécute quand même.
+4. La destination est-elle bien configurée (jeton du bot dans `.env`, orthographe exacte) ? Une destination mal réglée fait échouer l'envoi alors que la tâche s'exécute quand même : l'échec apparaît dans `hermes cron list` et `hermes cron doctor`, pas sur votre téléphone.
 5. Un résultat vide, ou contenant le marqueur `[SILENT]`, n'est volontairement pas envoyé.
 6. Deux passerelles en parallèle peuvent retarder ou sauter des tâches : n'en gardez qu'une.
 
@@ -112,7 +112,7 @@ hermes backup --quick    # photo rapide des fichiers d'état critiques
 
 L'archive complète contient vos clés : rangez-la comme un secret.
 
-> **Sur le terrain.** Dans notre installation, une sauvegarde des profils est faite chaque nuit.
+> **Sur le terrain (octobre 2026).** Nous sauvegardons nos profils chaque nuit.
 
 ## Quand demander de l'aide ?
 

@@ -9,7 +9,9 @@ Les mots qui reviennent dans ce guide, avec le terme anglais de la documentation
 | Fournisseur | provider | Le service qui fait tourner le modèle (ou votre propre machine, en local). |
 | Clé d'API | API key | Identifiant secret donné par un fournisseur, rangé dans `~/.hermes/.env`. |
 | Connexion par abonnement | OAuth | Connexion à un fournisseur avec votre compte, dans le navigateur, sans clé à gérer. |
-| Contexte | context | Tout ce que le modèle a sous les yeux pendant une conversation. Il se mesure en jetons (tokens) et sa taille est limitée. |
+| Jeton (de modèle) | token | Morceau de texte, de l'ordre d'un mot, par lequel les fournisseurs comptent ce qu'un modèle lit et écrit (chapitre 9). |
+| Jeton (de bot) | bot token | Clé secrète donnée par BotFather, qui permet à Hermes de piloter votre bot Telegram (chapitre 3). Rien à voir avec le précédent. |
+| Contexte | context | Tout ce que le modèle a sous les yeux pendant une conversation. Il se mesure en jetons et sa taille est limitée. |
 | Compression | compression | Résumé automatique d'une longue conversation pour libérer du contexte. |
 | Passerelle | gateway | Le processus qui relie Hermes aux messageries et déclenche les tâches programmées. |
 | Canal d'accueil | home channel | La conversation où arrivent les résultats des tâches programmées (`/sethome`). |

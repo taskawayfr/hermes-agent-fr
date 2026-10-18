@@ -1,0 +1,21 @@
+# Extrait de ~/.hermes/config.yaml : une base prudente pour un agent d'entreprise.
+# À fusionner avec votre configuration (ne remplacez pas le fichier entier).
+# Testé sur Hermes Agent v0.22.2 (scripts/tester_exemples.sh) ; explications : guide/05-securite-et-approbations.md.
+
+approvals:
+  # smart (défaut) : un modèle juge les commandes signalées ; en cas de doute, la question vous est posée.
+  mode: smart
+  # Refusés sans condition, même en mode off ou avec /yolo. Toujours entre guillemets.
+  deny:
+    - "git push --force*"
+    - "*curl*|*sh*"
+    - "*sendmail*"
+
+agent:
+  # Jeux d'outils retirés : l'agent ne peut même pas les appeler.
+  disabled_toolsets:
+    - computer_use   # pilotage de l'écran
+    - cronjob        # l'agent ne crée pas seul ses tâches programmées
+
+# Commandes approuvées « toujours » : commencez vide, relisez-la de temps en temps.
+command_allowlist: []

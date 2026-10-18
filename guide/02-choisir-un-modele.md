@@ -59,7 +59,7 @@ hermes config get model --json
 hermes status
 ```
 
-Pour changer de modèle pendant une conversation, tapez `/model` (sans argument, il affiche le modèle courant). Avec un nom, le changement ne vaut que pour la session en cours. Ajoutez `--global` pour l'enregistrer :
+Pour changer de modèle pendant une conversation, tapez `/model` : sans argument, il ouvre le choix du fournisseur puis du modèle au terminal, et affiche le modèle courant avec les choix possibles sur une messagerie. Avec un nom, le changement ne vaut que pour la session en cours. Ajoutez `--global` pour l'enregistrer :
 
 ```
 /model <nom-du-modèle> --provider <fournisseur> --global
@@ -76,7 +76,7 @@ La doc fixe une contrainte : le modèle doit offrir au moins 64 000 jetons de co
 
 ## Modèle dans le nuage ou en local ?
 
-**Dans le nuage** : le modèle tourne chez le fournisseur. C'est le plus simple et c'est le chemin par défaut. Vos messages sont envoyés au fournisseur que vous avez choisi, et à lui seul : la doc précise qu'Hermes ne collecte pas de télémétrie.
+**Dans le nuage** : le modèle tourne chez le fournisseur. C'est le plus simple et c'est le chemin par défaut. Vos messages sont envoyés au fournisseur que vous avez choisi, et la doc précise qu'Hermes ne collecte pas de télémétrie. Une nuance relevée dans le code : les tâches annexes (résumés, titres, images) peuvent, faute de réglage, se rabattre sur un autre fournisseur configuré. Réglez-les explicitement (chapitre 9, `auxiliary`) si vous voulez tout garder chez un seul fournisseur.
 
 **En local** : le modèle tourne sur votre machine ou sur un serveur à vous. Dans `hermes model`, on choisit « Custom endpoint » et on indique l'adresse du serveur (n'importe quel serveur compatible avec l'API OpenAI convient). Aucune clé de fournisseur, aucune donnée ne quitte la machine. Contreparties que la doc signale : il faut une machine assez puissante (la mémoire vive compte avant tout), les réponses sont plus lentes sans carte graphique, et il faut régler la taille du contexte à au moins 64 000 jetons sur le serveur. La page « Run Hermes Locally with Ollama » détaille un exemple pas à pas ; un coup d'œil suffit pour juger si c'est pour vous.
 
@@ -84,7 +84,7 @@ Pour une première installation en entreprise, commencez par le nuage : une seul
 
 Chaque profil a sa propre configuration : le modèle se règle donc profil par profil (chapitre 4).
 
-> **Sur le terrain.** Dans notre installation, l'agent qui coordonne les autres tourne sur le modèle le plus puissant de son fournisseur, et les agents spécialisés sur un modèle plus léger. Les tâches annexes de l'orchestrateur (relecture de sa mémoire après un échange) passent aussi sur le modèle léger.
+> **Sur le terrain (octobre 2026).** Chez nous, l'agent qui coordonne les autres tourne sur le modèle le plus puissant de son fournisseur, et les agents spécialisés sur un modèle plus léger. Les tâches annexes de l'orchestrateur (relecture de sa mémoire après un échange) passent aussi sur le modèle léger.
 
 ## Que faire quand le fournisseur est en panne ? Les fournisseurs de secours
 

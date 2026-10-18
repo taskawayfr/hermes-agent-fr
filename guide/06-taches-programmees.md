@@ -2,6 +2,8 @@
 
 Ce chapitre montre comment demander à Hermes d'exécuter un travail à heure fixe ou à intervalle régulier, et de vous en envoyer le résultat, sans que vous ayez à lui parler.
 
+![La vie d'une tâche programmée : la passerelle vérifie l'horloge, une session neuve s'ouvre à l'échéance, l'agent (ou un script seul) exécute, la réponse est livrée sur Telegram, en local, ou pas du tout si elle vaut [SILENT].](../images/tache.png)
+
 ## Comment ça marche ?
 
 Une tâche programmée (cron) est une consigne rattachée à un horaire. À chaque échéance, Hermes ouvre une session neuve, exécute la consigne et livre la réponse à l'endroit choisi.
@@ -11,7 +13,7 @@ C'est la passerelle (chapitre 3) qui fait avancer l'horloge : elle vérifie les 
 Deux points à retenir :
 
 - Chaque exécution part d'une page blanche, sans souvenir de vos conversations. La consigne doit donc contenir tout ce qu'il faut savoir.
-- Une tâche ne peut pas en créer d'autres : Hermes désactive la gestion des tâches pendant leur exécution.
+- Par défaut, une tâche ne peut pas en créer d'autres : Hermes désactive la gestion des tâches pendant leur exécution (réglable avec `cron.allow_agent_scheduling`, à laisser à `false` sauf besoin précis).
 
 ## Comment créer une tâche ?
 
@@ -47,7 +49,7 @@ L'horaire accepte plusieurs formes :
 
 Une tâche à délai unique ou à date précise ne tourne qu'une fois. Les autres tournent jusqu'à suppression.
 
-> **Sur le terrain.** Dans notre installation, les tâches programmées sont déclarées dans le dépôt et installées par script. Les agents ne peuvent pas en créer seuls : le jeu d'outils cron est désactivé dans leurs profils.
+> **Sur le terrain (octobre 2026).** Nos tâches programmées sont déclarées dans le dépôt et installées par script. Les agents ne peuvent pas en créer seuls : le jeu d'outils cron est désactivé dans leurs profils.
 
 ### Comment écrire une bonne consigne ?
 
@@ -126,7 +128,7 @@ Vérifiez dans l'ordre :
 7. Les journaux : `hermes logs`, ou `~/.hermes/logs/agent.log` et `~/.hermes/logs/errors.log`.
 8. `hermes cron doctor` : contrôle de santé des tâches.
 
-> **Sur le terrain.** Dans notre installation, une tâche programmée n'attend jamais la réponse d'un autre agent : elle serait coupée par le délai d'inactivité. Elle dépose sa demande et s'arrête ; la réponse est traitée au passage suivant.
+> **Sur le terrain (octobre 2026).** Chez nous, une tâche programmée n'attend jamais la réponse d'un autre agent : elle serait coupée par le délai d'inactivité. Elle dépose sa demande et s'arrête ; la réponse est traitée au passage suivant.
 
 ## Sources
 

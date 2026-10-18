@@ -1,0 +1,46 @@
+$ hermes --version
+Hermes Agent v0.22.2 (2026.9.24) · upstream d923a5eb
+Install directory: /opt/hermes
+Install method: docker
+Python: 3.14.7
+OpenAI SDK: 2.24.0
+
+$ hermes doctor
+
+┌─────────────────────────────────────────────────────────┐
+│                 🩺 Hermes Doctor                        │
+└─────────────────────────────────────────────────────────┘
+
+◆ Security Advisories
+  ✓ No active security advisories
+
+◆ MCP Server Security
+  ✓ No suspicious MCP stdio commands
+
+◆ Python Environment
+  ✓ Python 3.14.7
+  ✓ SQLite 3.53.1
+    → SQLite source id: 2026-05-05 10:34:17 c88b22011a54b4f6fbd149e9f8e4…
+  ✓ Runtime venv staged (/opt/hermes/.venv) (active in this process)
+
+◆ SSL / CA Certificates
+  ✓ TLS platform trust store configured; default SSL context available
+
+◆ Required Packages
+  ✓ OpenAI SDK
+  ✓ Rich (terminal UI)
+  ✓ python-dotenv
+  ✓ ruamel.yaml
+  ✓ HTTPX
+  ✓ Croniter (cron expressions) (optional)
+  ✓ python-telegram-bot (optional)
+  ✓ discord.py (optional)
+  ✓ Dashboard web surface (imports cleanly)
+
+◆ Configuration Files
+  ✓ Managed scope active: 0 config key(s), 0 env key(s) pinned by /etc/hermes
+  ✓ ~/./.env file exists
+  ✓ API key or custom endpoint configured
+  ✓ ~/./config.yaml exists
+  ✓ Config version up to date (v50)
+  …

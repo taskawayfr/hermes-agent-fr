@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Schémas du guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0A0E1A; --paper: #F5F3EE; --signal: #D4FF4F; --mist: #E8E5DE; --slate: #5B6170; --white: #ffffff;
+  --line: rgba(10, 14, 26, 0.12);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #ccc; font-family: Inter, sans-serif; color: var(--ink); padding: 40px; display: flex; flex-direction: column; gap: 40px; }
+.schema { width: 1200px; background: var(--paper); padding: 48px 56px; border: 2px solid var(--ink); }
+h1 { font-family: 'Space Grotesk', sans-serif; font-size: 34px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 6px; }
+.sous { color: var(--slate); font-size: 18px; margin-bottom: 36px; }
+.boite { background: var(--white); border: 2px solid var(--ink); border-radius: 4px; padding: 18px 20px; }
+.boite h2 { font-family: 'Space Grotesk', sans-serif; font-size: 21px; font-weight: 700; margin-bottom: 6px; }
+.boite p { font-size: 16px; line-height: 1.45; color: var(--ink); }
+.boite.signal { background: var(--signal); }
+.boite.encre { background: var(--ink); color: var(--paper); }
+.boite.encre > p, .boite.encre > h2 { color: var(--paper); }
+.boite.encre .boite p, .boite.encre .boite h2 { color: var(--ink); }
+.boite.encre .boite code { background: var(--mist); color: var(--ink); }
+.boite.brume { background: var(--mist); border-style: dashed; }
+code, .mono { font-family: 'JetBrains Mono', monospace; font-size: 14.5px; }
+.boite code { background: var(--mist); padding: 1px 6px; border-radius: 2px; }
+.boite.encre code { background: rgba(245,243,238,0.14); color: var(--signal); }
+.boite.signal code { background: rgba(10,14,26,0.08); }
+.fleche { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 26px; display: flex; align-items: center; justify-content: center; color: var(--ink); }
+.etiquette { font-family: 'JetBrains Mono', monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: var(--slate); margin-bottom: 8px; }
+.pied { margin-top: 30px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 14px; color: var(--slate); display: flex; justify-content: space-between; }
+
+/* 1. Architecture */
+#architecture .grille { display: grid; grid-template-columns: 250px 56px 1fr 56px 250px; align-items: stretch; }
+#architecture .colonne { display: flex; flex-direction: column; gap: 14px; justify-content: center; }
+#architecture .agent { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 22px; }
+#architecture .agent > h2 { grid-column: 1 / -1; }
+#architecture .agent .boite { padding: 12px 14px; }
+#architecture .agent .boite h2 { font-size: 17px; margin-bottom: 2px; }
+#architecture .agent .boite p { font-size: 14.5px; }
+#architecture .bas { display: grid; grid-template-columns: 250px 56px 1fr 56px 250px; margin-top: 18px; }
+
+/* 2. Où ranger quoi */
+#ranger .lignes { display: flex; flex-direction: column; gap: 12px; }
+#ranger .ligne { display: grid; grid-template-columns: 1fr 48px 300px; align-items: center; }
+#ranger .ligne .q { font-size: 18px; font-weight: 500; padding: 14px 18px; border: 2px solid var(--ink); border-radius: 4px; background: var(--white); }
+#ranger .ligne .r { padding: 14px 18px; }
+#ranger .ligne .r h2 { font-size: 19px; margin: 0; }
+#ranger .ligne .r p { font-size: 14px; color: var(--slate); }
+#ranger .ligne .r.signal p { color: var(--ink); }
+#ranger .ligne .r.encre p { color: rgba(245, 243, 238, 0.78); }
+
+/* 3. Barrières */
+#barrieres .chaine { display: flex; flex-direction: column; gap: 0; }
+#barrieres .etape { display: grid; grid-template-columns: 56px 1fr 300px; align-items: stretch; gap: 16px; }
+#barrieres .num { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 26px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--ink); border-radius: 4px; background: var(--ink); color: var(--signal); }
+#barrieres .issue { display: flex; align-items: center; padding: 14px 18px; border: 2px solid var(--ink); border-radius: 4px; font-size: 15.5px; background: var(--mist); }
+#barrieres .sep { height: 22px; display: grid; grid-template-columns: 56px 1fr; gap: 16px; }
+#barrieres .sep span { display: flex; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 18px; line-height: 22px; }
+#barrieres .fin { margin-top: 0; }
+
+/* 4. Tâche programmée */
+#tache .cycle { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; align-items: stretch; }
+#tache .cycle .boite { margin: 0 8px; }
+#tache .cycle-fleches { display: grid; grid-template-columns: repeat(4, 1fr); margin: 10px 0; }
+#tache .livraison { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 8px; }
+
+/* 5. Telegram */
+#telegram .etapes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+#telegram .etapes .boite { position: relative; padding-top: 44px; }
+#telegram .etapes .n { position: absolute; top: 12px; left: 20px; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; color: var(--slate); letter-spacing: 1px; }
+#telegram .cote { font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; padding: 3px 8px; border-radius: 2px; display: inline-block; margin-bottom: 8px; }
+#telegram .cote.tg { background: var(--mist); }
+#telegram .cote.mac { background: var(--ink); color: var(--signal); }
+</style>
+</head>
+<body>
+
+<!-- 1. ARCHITECTURE -->
+<section class="schema" id="architecture">
+  <h1>Comment Hermes s'organise</h1>
+  <p class="sous">Vous parlez à un agent. L'agent réfléchit avec un modèle et agit avec des outils.</p>
+  <div class="grille">
+    <div class="colonne">
+      <div class="etiquette">Vous</div>
+      <div class="boite"><h2>Terminal</h2><p><code>hermes</code> sur la machine</p></div>
+      <div class="boite"><h2>Messagerie</h2><p>Telegram, Discord, Slack, WhatsApp…</p></div>
+    </div>
+    <div class="fleche">→</div>
+    <div class="boite encre agent">
+      <h2>Un profil Hermes = un agent</h2>
+      <div class="boite"><h2>SOUL.md</h2><p>qui il est, comment il parle</p></div>
+      <div class="boite"><h2>Compétences</h2><p>ses procédures, chargées au besoin</p></div>
+      <div class="boite"><h2>Mémoire</h2><p>quelques notes relues à chaque session</p></div>
+      <div class="boite"><h2>config.yaml + .env</h2><p>modèle, outils, règles, clés</p></div>
+    </div>
+    <div class="fleche">→</div>
+    <div class="colonne">
+      <div class="etiquette">Il s'appuie sur</div>
+      <div class="boite signal"><h2>Un modèle</h2><p>chez un fournisseur, ou en local</p></div>
+      <div class="boite"><h2>Des outils</h2><p>terminal, fichiers, web, navigateur…</p></div>
+    </div>
+  </div>
+  <div class="bas">
+    <div></div><div></div>
+    <div class="boite brume"><h2>La passerelle (gateway)</h2><p>Processus de fond : relie les messageries à l'agent et déclenche les tâches programmées. Sans elle, l'agent ne répond qu'au terminal.</p></div>
+    <div></div><div></div>
+  </div>
+  <div class="pied"><span>Hermes Agent en français · chapitres 1 à 3</span><span>CC BY 4.0</span></div>
+</section>
+
+<!-- 2. OÙ RANGER QUOI -->
+<section class="schema" id="ranger">
+  <h1>Où ranger quoi</h1>
+  <p class="sous">Une information mal rangée est soit oubliée, soit relue pour rien à chaque message.</p>
+  <div class="lignes">
+    <div class="ligne"><div class="q">Qui est l'agent, comment il parle, son rôle</div><div class="fleche">→</div><div class="boite r encre"><h2>SOUL.md</h2><p>court, relu à chaque message</p></div></div>
+    <div class="ligne"><div class="q">Les règles d'un projet ou d'un dossier de travail</div><div class="fleche">→</div><div class="boite r"><h2>AGENTS.md</h2><p>chargé depuis le dossier de travail</p></div></div>
+    <div class="ligne"><div class="q">Une procédure à suivre, étape par étape</div><div class="fleche">→</div><div class="boite r"><h2>Une compétence</h2><p>chargée seulement quand il le faut</p></div></div>
+    <div class="ligne"><div class="q">Une préférence, une petite correction</div><div class="fleche">→</div><div class="boite r"><h2>La mémoire</h2><p>courte, écrite par le modèle</p></div></div>
+    <div class="ligne"><div class="q">Un fait qui doit rester exact : tarif, adresse, règle</div><div class="fleche">→</div><div class="boite r signal"><h2>Un fichier de référence</h2><p>que l'agent relit, jamais la mémoire</p></div></div>
+    <div class="ligne"><div class="q">Un deuxième agent, avec ses propres clés et sa mémoire</div><div class="fleche">→</div><div class="boite r"><h2>Un profil</h2><p><code>hermes profile create</code></p></div></div>
+  </div>
+  <div class="pied"><span>Hermes Agent en français · chapitre 4</span><span>CC BY 4.0</span></div>
+</section>
+
+<!-- 3. BARRIÈRES -->
+<section class="schema" id="barrieres">
+  <h1>Ce qu'une commande traverse avant de s'exécuter</h1>
+  <p class="sous">Dans l'ordre réel du code de Hermes. Les deux premières barrières ne dépendent pas du modèle.</p>
+  <div class="chaine">
+    <div class="etape"><div class="num">1</div><div class="boite"><h2>L'outil existe-t-il pour ce profil ?</h2><p>Un jeu d'outils retiré (<code>agent.disabled_toolsets</code>) n'est même pas proposé au modèle.</p></div><div class="issue"><span>Retiré : l'agent ne peut pas l'appeler.</span></div></div>
+    <div class="sep"><span>↓</span></div>
+    <div class="etape"><div class="num">2</div><div class="boite"><h2>Plugin ou crochet <code>pre_tool_call</code></h2><p>Votre code examine chaque appel d'outil, avant son exécution.</p></div><div class="issue"><span>Bloqué, la raison est renvoyée au modèle. S'il plante : bloqué aussi.</span></div></div>
+    <div class="sep"><span>↓</span></div>
+    <div class="etape"><div class="num">3</div><div class="boite"><h2>Le socle absolu</h2><p>Quelques commandes destructrices refusées dans tous les modes.</p></div><div class="issue"><span>Toujours refusée, même en mode <code>off</code>.</span></div></div>
+    <div class="sep"><span>↓</span></div>
+    <div class="etape"><div class="num">4</div><div class="boite"><h2>Votre liste de refus</h2><p><code>approvals.deny</code> : vos motifs interdits.</p></div><div class="issue"><span>Refusée, même en mode <code>off</code> ou <code>/yolo</code>.</span></div></div>
+    <div class="sep"><span>↓</span></div>
+    <div class="etape"><div class="num">5</div><div class="boite"><h2>Le mode d'approbation</h2><p><code>smart</code> (défaut), <code>manual</code> ou <code>off</code>, et les commandes déjà approuvées « toujours ».</p></div><div class="issue"><span>Exécutée, refusée, ou la question vous est posée.</span></div></div>
+    <div class="sep"><span>↓</span></div>
+    <div class="etape fin"><div class="num">✓</div><div class="boite signal"><h2>Exécution</h2><p>Sur la machine, ou dans un conteneur si vous avez isolé le terminal.</p></div><div></div></div>
+  </div>
+  <div class="pied"><span>Hermes Agent en français · chapitre 5</span><span>CC BY 4.0</span></div>
+</section>
+
+<!-- 4. TÂCHE PROGRAMMÉE -->
+<section class="schema" id="tache">
+  <h1>La vie d'une tâche programmée</h1>
+  <p class="sous">C'est la passerelle qui fait avancer l'horloge. Chaque passage repart d'une page blanche.</p>
+  <div class="cycle">
+    <div class="boite brume"><div class="etiquette">1 · Horloge</div><h2>La passerelle vérifie</h2><p>Les échéances sont contrôlées à intervalle régulier, tant que la passerelle tourne.</p></div>
+    <div class="boite"><div class="etiquette">2 · Échéance</div><h2>Session neuve</h2><p>Aucun souvenir de vos conversations : la consigne doit tout contenir.</p></div>
+    <div class="boite encre"><div class="etiquette" style="color:#D4FF4F">3 · Travail</div><h2>L'agent exécute</h2><p>Ou un script seul, sans modèle (<code>--no-agent</code>).</p></div>
+    <div class="boite"><div class="etiquette">4 · Résultat</div><h2>Livraison</h2><p>La réponse finale part seule vers la destination choisie.</p></div>
+  </div>
+  <div class="cycle-fleches"><div></div><div></div><div></div><div class="fleche">↓</div></div>
+  <div class="livraison">
+    <div class="boite signal"><h2><code>--deliver telegram</code></h2><p>Vers le canal d'accueil (<code>/sethome</code>), ou une conversation précise.</p></div>
+    <div class="boite"><h2><code>--deliver local</code></h2><p>Dans <code>~/.hermes/cron/output/</code> sur la machine.</p></div>
+    <div class="boite"><h2>Réponse <code>[SILENT]</code></h2><p>Rien n'est envoyé, le résultat est archivé. Les échecs, eux, sont toujours livrés.</p></div>
+  </div>
+  <div class="pied"><span>Hermes Agent en français · chapitre 6</span><span>CC BY 4.0</span></div>
+</section>
+
+<!-- 5. TELEGRAM -->
+<section class="schema" id="telegram">
+  <h1>Brancher Telegram en six étapes</h1>
+  <p class="sous">Trois se font dans Telegram, trois sur la machine où tourne Hermes.</p>
+  <div class="etapes">
+    <div class="boite"><span class="n">ÉTAPE 1</span><span class="cote tg">Telegram</span><h2>Créer le bot</h2><p>Écrire <code>/newbot</code> à <code>@BotFather</code>, choisir un nom terminé par <code>bot</code>.</p></div>
+    <div class="boite"><span class="n">ÉTAPE 2</span><span class="cote tg">Telegram</span><h2>Garder le jeton</h2><p>BotFather donne un jeton secret. Qui l'a contrôle le bot.</p></div>
+    <div class="boite"><span class="n">ÉTAPE 3</span><span class="cote tg">Telegram</span><h2>Trouver son identifiant</h2><p>Écrire à <code>@userinfobot</code> : il répond par un numéro.</p></div>
+    <div class="boite"><span class="n">ÉTAPE 4</span><span class="cote mac">Machine</span><h2>Brancher le bot</h2><p><code>hermes gateway setup</code> : jeton, puis identifiant autorisé.</p></div>
+    <div class="boite"><span class="n">ÉTAPE 5</span><span class="cote mac">Machine</span><h2>Essayer</h2><p><code>hermes gateway run</code>, écrire au bot, puis <code>Ctrl+C</code>.</p></div>
+    <div class="boite signal"><span class="n">ÉTAPE 6</span><span class="cote mac">Machine</span><h2>Laisser tourner</h2><p><code>hermes gateway install</code> puis <code>hermes gateway start</code>.</p></div>
+  </div>
+  <div class="pied"><span>Hermes Agent en français · chapitre 3</span><span>CC BY 4.0</span></div>
+</section>
+
+</body>
+</html>

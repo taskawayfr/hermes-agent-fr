@@ -1,0 +1,3 @@
+name: garde-sorties
+version: "1.0"
+description: Bloque l'envoi direct de mails depuis le terminal et soumet chaque git push à une validation humaine.

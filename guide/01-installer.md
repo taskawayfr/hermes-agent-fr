@@ -13,7 +13,7 @@ La doc classe les systèmes en deux niveaux. Le niveau 1 est celui que l'équipe
 | Linux ou WSL2 | `install.sh` | Testé sur la dernière Ubuntu ; une distribution avec glibc, systemd et la hiérarchie standard de fichiers (FHS) devrait bien convenir |
 | Docker | image officielle | `hermes update` ne fonctionne pas : on met à jour en lançant une nouvelle image |
 
-Au niveau 2 (maintenance au mieux) : Nix et Android avec Termux. Ne sont pas pris en charge : l'installation par `pip`, `brew` ou AUR.
+Au niveau 2 (maintenance au mieux) : Nix et Android avec Termux (la page Termux de la doc le dit actuellement cassé, voir chapitre 10). Ne sont pas pris en charge : l'installation par `pip`, `brew` ou AUR.
 
 Piège : pour un Mac Intel, la doc se contredit un peu. La page d'installation dit que l'installeur Mac est réservé à Apple Silicon, et la page de support décrit un paquet Desktop séparé pour Intel. Si vous avez un Mac Intel, relisez la page « Platform Support » avant de commencer.
 
@@ -53,6 +53,10 @@ hermes doctor
 
 `hermes --version` affiche la version. `hermes doctor` contrôle la configuration et les dépendances, et dit ce qui manque. Si `hermes` reste introuvable, voir le chapitre 8.
 
+![Sortie réelle de hermes --version puis hermes doctor sur une installation neuve : chaque contrôle est précédé d'une coche, par rubrique (environnement Python, paquets requis, fichiers de configuration).](../images/terminal-doctor.png)
+
+*Sortie réelle, sur une installation neuve (image Docker officielle, v0.22.2). Un `⚠` signale un point à régler ; la rubrique « Required Packages » est celle à relire après une mise à jour.*
+
 ## Que se passe-t-il au premier lancement ?
 
 Lancez simplement :
@@ -81,9 +85,7 @@ Deux cas.
 - **Vous parlez à l'agent depuis votre poste, quand vous travaillez.** Votre ordinateur suffit.
 - **L'agent doit travailler seul** (répondre sur une messagerie, lancer des tâches programmées). Il faut alors une machine allumée en permanence. La passerelle (gateway), le processus qui relie Hermes à Telegram ou à d'autres messageries, doit tourner. Les tâches programmées sont déclenchées par la passerelle : une simple session de discussion dans un terminal ne les lance pas.
 
-Sur Mac ou Linux, la passerelle peut s'installer comme service de fond avec `hermes gateway install`, puis `hermes gateway start`. Sous WSL, le support systemd est peu fiable : la doc conseille `hermes gateway run` (au premier plan), éventuellement dans `tmux`. Sous Android, le système peut arrêter les processus en arrière-plan : à éviter pour un agent autonome. Sur Linux, un service qui doit survivre à la déconnexion demande `loginctl enable-linger` (à lancer par un administrateur).
-
-> **Sur le terrain.** Dans notre installation, Hermes tourne sur un Mac mini allumé en permanence ; on lui parle surtout par Telegram.
+Sur Mac ou Linux, la passerelle peut s'installer comme service de fond avec `hermes gateway install`, puis `hermes gateway start`. Sous WSL2, la page de démarrage dédiée recommande d'activer systemd (fichier `/etc/wsl.conf`, puis `wsl --shutdown`) avant d'installer le service ; sans systemd, lancez la passerelle au premier plan avec `hermes gateway run`, par exemple dans `tmux`. La FAQ officielle, plus ancienne, dit encore que systemd y est peu fiable : suivez la page WSL. Sous Android, le système peut arrêter les processus en arrière-plan : à éviter pour un agent autonome. Sur Linux, un service qui doit survivre à la déconnexion demande `loginctl enable-linger` (à lancer par un administrateur).
 
 ## Comment mettre à jour ?
 
@@ -113,7 +115,7 @@ hermes pm status         # état de la préparation des dépendances
 
 Si la configuration a changé, `hermes config check` liste ce qui manque et `hermes config migrate` l'ajoute.
 
-> **Sur le terrain.** Dans notre installation, après une mise à jour (`hermes update`), l'environnement Python des outils a été réinstallé et un paquet a disparu : un outil s'est arrêté sans bruit, jusqu'à ce que le contrôle quotidien le signale. Depuis, on vérifie après chaque mise à jour. Un `hermes gateway restart` a aussi parfois été nécessaire pour que la configuration soit prise en compte.
+> **Sur le terrain (octobre 2026).** Chez nous, après une mise à jour (`hermes update`), l'environnement Python des outils a été réinstallé et un paquet a disparu : un outil s'est arrêté sans bruit, jusqu'à ce que le contrôle quotidien le signale. Depuis, on vérifie après chaque mise à jour. Un `hermes gateway restart` a aussi parfois été nécessaire pour que la configuration soit prise en compte.
 
 ## Sources
 

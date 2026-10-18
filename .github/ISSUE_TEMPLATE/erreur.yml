@@ -1,0 +1,28 @@
+name: Erreur dans le guide
+description: Une commande, une explication ou un lien qui ne correspond plus à Hermes Agent
+labels: ["erreur"]
+body:
+  - type: input
+    id: chapitre
+    attributes:
+      label: Chapitre
+      placeholder: "guide/03-brancher-telegram.md"
+    validations:
+      required: true
+  - type: textarea
+    id: probleme
+    attributes:
+      label: Ce qui est faux
+      description: La phrase ou la commande, et ce que vous avez constaté à la place.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version de Hermes
+      description: Sortie de `hermes --version`
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: "Ne collez jamais de clé d'API, de jeton ni de fichier `.env`."
