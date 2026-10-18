@@ -1,0 +1,38 @@
+# Vérifie le guide contre la dernière version publiée de Hermes Agent (image Docker officielle) :
+# chaque commande citée, chaque exemple de exemples/, chaque lien.
+# Tourne à chaque modification et chaque lundi, pour repérer ce qu'une nouvelle version de Hermes a cassé.
+name: Vérification du guide
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+jobs:
+  commandes-et-exemples:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Démarrer Hermes Agent (image officielle)
+        run: |
+          docker run -d --name hermes-ci nousresearch/hermes-agent:latest sleep infinity
+          for i in $(seq 1 60); do docker exec hermes-ci hermes --version && break; sleep 2; done
+      - name: Chaque commande hermes du guide existe
+        env:
+          HERMES_CMD: docker exec hermes-ci hermes
+        run: python3 scripts/verifier_commandes.py
+      - name: Les exemples fonctionnent
+        run: scripts/tester_exemples.sh nousresearch/hermes-agent:latest
+
+  liens:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Chaque lien répond
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --no-progress --max-concurrency 4 --accept 200,429 './**/*.md'
+          fail: true
