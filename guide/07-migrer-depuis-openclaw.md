@@ -4,12 +4,25 @@ Ce chapitre s'adresse à celles et ceux qui utilisent déjà OpenClaw (ou ses an
 
 > **Sur le terrain (octobre 2026).** Nous n'utilisons pas OpenClaw nous-mêmes : ce chapitre s'appuie sur la documentation officielle, et nous n'avons pas fait cette migration. Les commandes ont été relues dans la documentation et dans l'aide en ligne (`--help`), pas exécutées. Lancez toujours la simulation d'abord.
 
-## Que fait la commande de migration ?
+> **Mise à jour (28 octobre 2026).** La migration ne fait plus partie du cœur de Hermes : elle est passée dans le plugin `agent-importers`, avec les mêmes options. La commande s'appelle désormais `hermes import-agent openclaw`. L'ancienne écriture `hermes claw migrate` fonctionne encore une fois le plugin installé ; sans lui, `hermes claw` se contente d'afficher la commande d'installation.
 
-`hermes claw migrate` lit votre dossier OpenClaw, puis importe ce qui a un équivalent dans Hermes. Par défaut, elle lit `~/.openclaw/`. Les anciens dossiers `~/.clawdbot/` et `~/.moltbot/` sont détectés automatiquement. Si votre installation est ailleurs :
+## Quel plugin installer d'abord ?
+
+Une fois par profil :
 
 ```bash
-hermes claw migrate --source <chemin du dossier OpenClaw>
+hermes plugins install agent-importers
+hermes plugins enable agent-importers
+```
+
+L'installation seule ne suffit pas : tant que le plugin n'est pas activé, les commandes restent introuvables. Les profils qui ont une source de synchronisation le reçoivent avec `hermes update`.
+
+## Que fait la commande de migration ?
+
+`hermes import-agent openclaw` lit votre dossier OpenClaw, puis importe ce qui a un équivalent dans Hermes. Par défaut, elle lit `~/.openclaw/`. Les anciens dossiers `~/.clawdbot/` et `~/.moltbot/` sont détectés automatiquement. Si votre installation est ailleurs :
+
+```bash
+hermes import-agent openclaw --source <chemin du dossier OpenClaw>
 ```
 
 Elle montre toujours un aperçu complet avant de modifier quoi que ce soit, puis demande confirmation.
@@ -17,7 +30,7 @@ Elle montre toujours un aperçu complet avant de modifier quoi que ce soit, puis
 ## Comment simuler d'abord ?
 
 ```bash
-hermes claw migrate --dry-run
+hermes import-agent openclaw --dry-run
 ```
 
 Cette commande affiche ce qui serait importé et s'arrête là. Rien n'est modifié. Lisez la liste en entier, notamment les conflits : par défaut, la migration refuse de s'appliquer si le plan contient des conflits avec des fichiers Hermes existants.
@@ -39,7 +52,7 @@ D'après la documentation :
 Les secrets. Aucun préréglage n'importe les clés d'API ni les jetons sans que vous le demandiez :
 
 ```bash
-hermes claw migrate --migrate-secrets
+hermes import-agent openclaw --migrate-secrets
 ```
 
 Sans cette option, il faudra recréer vos clés et votre jeton Telegram dans Hermes (chapitre 3 pour le jeton). Même avec l'option, seules les clés d'une liste restreinte sont copiées, et les secrets stockés dans un fichier ou obtenus par une commande ne peuvent pas être résolus automatiquement : ils sont signalés, et vous les ajoutez à la main.
@@ -65,9 +78,10 @@ Par défaut, une sauvegarde de `~/.hermes/` est écrite avant l'application, dan
 
 ## Comment migrer, dans l'ordre ?
 
-1. `hermes claw migrate --dry-run`, puis lecture de l'aperçu.
-2. `hermes claw migrate`, en validant l'aperçu quand il est conforme. Ajoutez `--migrate-secrets` seulement si vous voulez reprendre les clés.
-3. Relire le rapport de fin de migration (éléments importés, ignorés, en conflit).
+1. `hermes plugins install agent-importers` puis `hermes plugins enable agent-importers`, si ce n'est pas déjà fait.
+2. `hermes import-agent openclaw --dry-run`, puis lecture de l'aperçu.
+3. `hermes import-agent openclaw`, en validant l'aperçu quand il est conforme. Ajoutez `--migrate-secrets` seulement si vous voulez reprendre les clés.
+4. Relire le rapport de fin de migration (éléments importés, ignorés, en conflit).
 
 ## Que vérifier après la migration ?
 
@@ -86,9 +100,10 @@ Par défaut, une sauvegarde de `~/.hermes/` est écrite avant l'application, dan
 - Compétences invisibles : démarrez une nouvelle session, ou tapez `/skills` pour vérifier qu'elles sont chargées.
 - Voix non migrée : réglez-la à la main avec `hermes config set`.
 
-Si vous venez de Claude Code ou de Codex CLI plutôt que d'OpenClaw, la documentation prévoit une autre commande, `hermes import-agent`.
+Si vous venez de Claude Code, de Codex CLI ou de Cursor plutôt que d'OpenClaw, le même plugin s'en charge : `hermes import-agent claude-code`, `hermes import-agent codex` ou `hermes import-agent cursor` (avec `--dry-run` pour simuler). Sans argument, `hermes import-agent` cherche lui-même ces dossiers.
 
 ## Sources
 
 - https://hermes-agent.nousresearch.com/docs/guides/migrate-from-openclaw
-- Aide en ligne : `hermes claw --help` et `hermes claw migrate --help`
+- https://hermes-agent.nousresearch.com/docs/user-guide/import-from-other-agents
+- Aide en ligne, une fois le plugin installé : `hermes import-agent --help`
