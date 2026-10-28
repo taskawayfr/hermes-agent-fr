@@ -12,9 +12,10 @@ Une fois par profil :
 
 ```bash
 hermes plugins install agent-importers
+hermes plugins enable agent-importers
 ```
 
-Les profils qui ont une source de synchronisation le reçoivent avec `hermes update`.
+L'installation seule ne suffit pas : tant que le plugin n'est pas activé, les commandes restent introuvables. Les profils qui ont une source de synchronisation le reçoivent avec `hermes update`.
 
 ## Que fait la commande de migration ?
 
@@ -77,7 +78,7 @@ Par défaut, une sauvegarde de `~/.hermes/` est écrite avant l'application, dan
 
 ## Comment migrer, dans l'ordre ?
 
-1. `hermes plugins install agent-importers`, si ce n'est pas déjà fait.
+1. `hermes plugins install agent-importers` puis `hermes plugins enable agent-importers`, si ce n'est pas déjà fait.
 2. `hermes import-agent openclaw --dry-run`, puis lecture de l'aperçu.
 3. `hermes import-agent openclaw`, en validant l'aperçu quand il est conforme. Ajoutez `--migrate-secrets` seulement si vous voulez reprendre les clés.
 4. Relire le rapport de fin de migration (éléments importés, ignorés, en conflit).

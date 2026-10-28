@@ -98,7 +98,7 @@ Révoquez-la **d'abord** chez le fournisseur (ou BotFather pour un jeton Telegra
 ## Aller plus loin
 
 ### Je viens d'OpenClaw : puis-je migrer ?
-Oui : installez le plugin (`hermes plugins install agent-importers`), puis `hermes import-agent openclaw`, en commençant par `--dry-run` pour simuler. Les secrets ne sont pas importés par défaut. Chapitre 7.
+Oui : installez et activez le plugin (`hermes plugins install agent-importers`, puis `hermes plugins enable agent-importers`), puis `hermes import-agent openclaw`, en commençant par `--dry-run` pour simuler. Les secrets ne sont pas importés par défaut. Chapitre 7.
 
 ### Où demander de l'aide ?
 Lancez `hermes doctor`, puis relisez les journaux. Pour demander à quelqu'un, `hermes dump` produit un résumé de votre installation à copier. Sinon, les tickets du projet sur GitHub, avec votre système, la version (`hermes --version`) et le message d'erreur complet. Chapitre 8.

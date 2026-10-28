@@ -22,6 +22,7 @@ jobs:
           for i in $(seq 1 60); do docker exec hermes-ci hermes --version && break; sleep 2; done
           # Les commandes de migration (chapitre 7) vivent dans un plugin depuis octobre 2026.
           docker exec hermes-ci hermes plugins install agent-importers
+          docker exec hermes-ci hermes plugins enable agent-importers
       - name: Chaque commande hermes du guide existe
         env:
           HERMES_CMD: docker exec hermes-ci hermes
